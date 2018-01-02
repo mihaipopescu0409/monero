@@ -33,6 +33,17 @@ type Destination struct {
 	Address string `json:"address"`
 }
 
+type CreateWallet struct {
+	Filename string `json:"filename"`
+	Password string `json:"password"`
+	Language string `json:"language"`
+}
+
+type OpenWallet struct {
+	Filename string `json:"filename"`
+	Password string `json:"password"`
+}
+
 type Transfer struct {
 	Fee    uint   `json:"fee,omitempty"`
 	TxHash string `json:"tx_hash,omitempty"`

@@ -19,6 +19,32 @@ func (c *WalletClient) GetBalance() (Balance, error) {
 	return rep, nil
 }
 
+func (c *WalletClient) CreateNewWallet(filename string, password string, language string) (bool, error) {
+	req := CreateWallet {
+		Filename: filename,
+		Password: password,
+		Language: language,
+	}
+	if err := c.Wallet("create_wallet", req, nil); err != nil {
+		return true, err
+	}
+	return true, nil
+}
+
+
+func (c *WalletClient) OpenWallet(filename string, password string) (bool, error){
+	req := OpenWallet {
+		Filename: filename,
+		Password: password,
+	}
+
+	if err := c.Wallet("open_wallet", req, nil); err != nil {
+		return false, err
+	}
+
+	return true, nil
+}
+
 func (c *WalletClient) GetAddress() (Address, error) {
 	var rep Address
 	if err := c.Wallet("getaddress", nil, &rep); err != nil {
